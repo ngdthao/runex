@@ -67,7 +67,7 @@ jobs:
           if [ "$GOOS" = "windows" ]; then
             EXT=".exe"
           fi
-          go build -mod=mod -ldflags="-s -w" -o runex${EXT} ./cmd/runex
+          go build -mod=mod -ldflags="-s -w" -o runex${EXT}
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
