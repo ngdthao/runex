@@ -1,30 +1,34 @@
 # Runex
 
-CLI tool to detect and analyze runtime errors in real-time.
+Công cụ CLI để phát hiện và phân tích lỗi runtime theo thời gian thực.
 
-## Features
+## Tính năng
 
-- **Real-time Error Detection**: Monitors stdout/stderr while streaming command output
-- **Multi-language Support**: Detects errors from Go, Python, Node.js, Java, Ruby, and Rust
-- **Stack Trace Extraction**: Automatically extracts stack traces from error output
-- **AI-Powered Analysis**: Optional AI analysis for deeper error understanding
-- **Colored Output**: Terminal-friendly colored error messages
+- **Phát hiện lỗi thời gian thực**: Giám sát stdout/stderr trong khi truyền tải đầu ra của lệnh
+- **Hỗ trợ đa ngôn ngữ**: Phát hiện lỗi từ Go, Python, Node.js, Java, Ruby và Rust
+- **Trích xuất Stack Trace**: Tự động trích xuất stack trace từ đầu ra lỗi
+- **Phân tích AI**: Tùy chọn phân tích AI để hiểu sâu hơn về lỗi
+- **Màu sắc đầu ra**: Thông báo lỗi có màu sắc thân thiện với terminal
 
-## Introduction
+---
 
-Runex is a command-line interface (CLI) tool that helps you monitor and detect runtime errors automatically when running programs. Instead of having to read through the entire output to find errors, Runex monitors stdout/stderr and immediately notifies you when errors are detected along with the full stack trace.
+## Giới thiệu
 
-## Installation
+Runex là công cụ giao diện dòng lệnh (CLI) giúp bạn giám sát và phát hiện lỗi runtime một cách tự động khi chạy chương trình. Thay vì phải đọc toàn bộ đầu ra để tìm lỗi, Runex giám sát stdout/stderr và ngay lập tức thông báo cho bạn khi phát hiện lỗi cùng với full stack trace.
 
-### From source (using Go)
+---
+
+## Cài đặt
+
+### Từ source code (sử dụng Go)
 
 ```bash
 go install github.com/runex/runex@latest
 ```
 
-### From GitHub Releases
+### Từ GitHub Releases
 
-When releases are available, you can download the appropriate binary for your operating system:
+Khi các bản phát hành có sẵn, bạn có thể tải xuống file nhị phân phù hợp cho hệ điều hành của mình:
 
 ```bash
 # macOS (Apple Silicon)
@@ -43,13 +47,15 @@ chmod +x runex
 sudo mv runex /usr/local/bin/
 
 # Windows
-# Download the .exe file from the Releases page and add to PATH
+# Tải file .exe từ trang Releases và thêm vào PATH
 ```
 
-## Quick Start
+---
+
+## Bắt đầu nhanh
 
 ```bash
-# Run any command with error detection
+# Chạy bất kỳ lệnh nào với phát hiện lỗi
 runex go run main.go
 
 runex python script.py
@@ -57,26 +63,28 @@ runex python script.py
 runex node app.js
 ```
 
-## Detailed Usage
+---
 
-### Flags
+## Sử dụng chi tiết
 
-| Flag | Description | Example |
+### Các cờ (Flags)
+
+| Cờ | Mô tả | Ví dụ |
 |------|-------------|---------|
-| `-v` | Enable verbose mode, shows additional debug info | `runex -v go run main.go` |
-| `--no-color` | Disable colored output | `runex --no-color python script.py` |
-| `--ai` | Enable AI-powered analysis for deeper error understanding | `runex --ai node app.js` |
-| `--language` | Manually specify language (go, python, node, java, ruby, rust) | `runex --language go run main.go` |
+| `-v` | Bật chế độ verbose, hiển thị thông tin debug bổ sung | `runex -v go run main.go` |
+| `--no-color` | Tắt màu sắc đầu ra | `runex --no-color python script.py` |
+| `--ai` | Bật phân tích AI để hiểu sâu hơn về lỗi | `runex --ai node app.js` |
+| `--language` | Chỉ định ngôn ngữ thủ công (go, python, node, java, ruby, rust) | `runex --language go run main.go` |
 
-### Language Examples
+### Ví dụ theo ngôn ngữ
 
 #### Go
 
 ```bash
-# Run Go file
+# Chạy file Go
 runex go run main.go
 
-# Run tests
+# Chạy tests
 runex go test ./...
 
 # Build
@@ -86,73 +94,75 @@ runex go build -o myapp .
 #### Python
 
 ```bash
-# Run Python script
+# Chạy script Python
 runex python script.py
 
-# Run module
+# Chạy module
 runex python -m mymodule
 
-# Using pipenv
+# Sử dụng pipenv
 runex pipenv run python main.py
 ```
 
 #### Node.js
 
 ```bash
-# Run JavaScript file
+# Chạy file JavaScript
 runex node app.js
 
-# Run with npm
+# Chạy với npm
 runex npm start
 
-# Run with yarn
+# Chạy với yarn
 runex yarn start
 ```
 
 #### Java
 
 ```bash
-# Run class file
+# Chạy file class
 runex java Main
 
-# Run with Maven
+# Chạy với Maven
 runex mvn exec:java
 
-# Run with Gradle
+# Chạy với Gradle
 runex gradle run
 ```
 
 #### Ruby
 
 ```bash
-# Run Ruby file
+# Chạy file Ruby
 runex ruby script.rb
 
-# Run with Bundler
+# Chạy với Bundler
 runex bundle exec ruby script.rb
 
-# Run Rails
+# Chạy Rails
 runex rails server
 ```
 
 #### Rust
 
 ```bash
-# Run Rust project
+# Chạy project Rust
 runex cargo run
 
-# Run tests
+# Chạy tests
 runex cargo test
 
 # Build
 runex cargo build
 ```
 
-## Configuration
+---
 
-### Configuration File
+## Cấu hình
 
-Create `~/.runex/config.yaml` to store default configuration:
+### File cấu hình
+
+Tạo `~/.runex/config.yaml` để lưu cấu hình mặc định:
 
 ```yaml
 verbose: false
@@ -161,33 +171,35 @@ ai: false
 language: ""
 ```
 
-### Environment Variables
+### Biến môi trường
 
-| Variable | Description | Default |
+| Biến | Mô tả | Mặc định |
 |----------|-------------|---------|
-| `RUNEX_VERBOSE` | Enable verbose mode | `false` |
-| `RUNEX_NO_COLOR` | Disable colors | `false` |
-| `RUNEX_AI` | Enable AI analysis | `false` |
-| `RUNEX_LANGUAGE` | Default language | `""` |
+| `RUNEX_VERBOSE` | Bật chế độ verbose | `false` |
+| `RUNEX_NO_COLOR` | Tắt màu sắc | `false` |
+| `RUNEX_AI` | Bật phân tích AI | `false` |
+| `RUNEX_LANGUAGE` | Ngôn ngữ mặc định | `""` |
 
-### Configuration Priority
+### Ưu tiên cấu hình
 
-Priority order (highest to lowest):
-1. Command line flags
-2. Environment variables
-3. Configuration file (`~/.runex/config.yaml`)
+Thứ tự ưu tiên (cao nhất đến thấp nhất):
+1. Cờ dòng lệnh
+2. Biến môi trường
+3. File cấu hình (`~/.runex/config.yaml`)
 
-## How It Works
+---
 
-1. **Startup**: Runex receives the command from the user and executes it
-2. **Monitoring**: Simultaneously reads stdout and stderr from the running command
-3. **Detection**: Analyzes output to find known error patterns for each language
-4. **Notification**: When an error is detected, displays the notification with stack trace
-5. **Completion**: Command finishes, Runex returns the corresponding exit code
+## Cách hoạt động
 
-### Supported Languages
+1. **Khởi động**: Runex nhận lệnh từ người dùng và thực thi
+2. **Giám sát**: Đồng thời đọc stdout và stderr từ lệnh đang chạy
+3. **Phát hiện**: Phân tích đầu ra để tìm các mẫu lỗi known cho từng ngôn ngữ
+4. **Thông báo**: Khi phát hiện lỗi, hiển thị thông báo kèm stack trace
+5. **Hoàn thành**: Lệnh kết thúc, Runex trả về mã thoát tương ứng
 
-| Language | Detected Error Types |
+### Ngôn ngữ được hỗ trợ
+
+| Ngôn ngữ | Loại lỗi được phát hiện |
 |----------|---------------------|
 | Go       | panic, runtime error |
 | Python   | exceptions, errors |
@@ -196,18 +208,20 @@ Priority order (highest to lowest):
 | Ruby     | errors |
 | Rust     | panic, compile errors |
 
-## Real-world Examples
+---
 
-### Example 1: Debug Go Application
+## Ví dụ thực tế
+
+### Ví dụ 1: Debug ứng dụng Go
 
 ```bash
-# Assuming you have a main.go with an error
+# Giả sử bạn có main.go với một lỗi
 runex -v go run main.go
 ```
 
-Output:
+Đầu ra:
 ```
-[ERROR] Go error detected
+[ERROR] Phát hiện lỗi Go
 panic: index out of range [1] with length 0
 
 goroutine 1 [running]:
@@ -215,34 +229,36 @@ main.main()
     /path/to/main.go:10 +0x...
 ```
 
-### Example 2: Debug Python Script
+### Ví dụ 2: Debug Python Script
 
 ```bash
-# Run Python script with verbose
+# Chạy Python script với verbose
 runex -v python myscript.py
 ```
 
-### Example 3: Debug Node.js with AI
+### Ví dụ 3: Debug Node.js với AI
 
 ```bash
-# Analyze Node.js errors using AI
+# Phân tích lỗi Node.js bằng AI
 runex --ai node app.js
 ```
 
-### Example 4: Disable Colors for CI/CD
+### Ví dụ 4: Tắt màu cho CI/CD
 
 ```bash
-# Run in CI environment
+# Chạy trong môi trường CI
 runex --no-color go test ./...
 ```
 
-### Example 5: Force Language Detection
+### Ví dụ 5: Chỉ định ngôn ngữ thủ công
 
 ```bash
-# Force detection for Go
+# Chỉ định phát hiện cho Go
 runex --language go run main.go
 ```
 
-## License
+---
+
+## Giấy phép
 
 MIT
