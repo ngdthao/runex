@@ -13,8 +13,8 @@ import (
 )
 
 type Runner struct {
-	detector *detector.Detector
-	output   io.Writer
+	detector  *detector.Detector
+	output    io.Writer
 	errOutput io.Writer
 }
 
@@ -58,7 +58,9 @@ func (r *Runner) Run(ctx context.Context, cmd string, args []string) (*RunResult
 		for {
 			n, readErr := pr.Read(buf)
 			if n > 0 {
-				r.errOutput.Write(buf[:n])
+				if _, err := r.errOutput.Write(buf[:n]); err != nil {
+					// ignore error
+				}
 
 				mu.Lock()
 				if detectedError == nil {
@@ -111,7 +113,9 @@ func (r *Runner) Run(ctx context.Context, cmd string, args []string) (*RunResult
 	case <-ctx.Done():
 		pw.Close()
 		wg.Wait()
-		command.Process.Kill()
+		if err := command.Process.Kill(); err != nil {
+			// ignore error
+		}
 		return nil, ctx.Err()
 	}
 }

@@ -8,19 +8,11 @@ import (
 )
 
 type Config struct {
-	Verbose  bool   `mapstructure:"verbose"`
-	NoColor  bool   `mapstructure:"no_color"`
-	AI       bool   `mapstructure:"ai"`
+	Verbose    bool   `mapstructure:"verbose"`
+	NoColor    bool   `mapstructure:"no_color"`
+	AI         bool   `mapstructure:"ai"`
 	AIProvider string `mapstructure:"ai_provider"`
-	Language string `mapstructure:"language"`
-}
-
-var defaultConfig = Config{
-	Verbose:  false,
-	NoColor:  false,
-	AI:       false,
-	AIProvider: "openai",
-	Language: "",
+	Language   string `mapstructure:"language"`
 }
 
 func Load() (*Config, error) {
@@ -59,7 +51,7 @@ func Load() (*Config, error) {
 	return &cfg, nil
 }
 
-func (c *Config) SetVerbose(v bool)  { c.Verbose = v }
-func (c *Config) SetNoColor(v bool)   { c.NoColor = v }
-func (c *Config) SetAI(v bool)        { c.AI = v }
+func (c *Config) SetVerbose(v bool)    { c.Verbose = v }
+func (c *Config) SetNoColor(v bool)    { c.NoColor = v }
+func (c *Config) SetAI(v bool)         { c.AI = v }
 func (c *Config) SetLanguage(l string) { c.Language = l }
