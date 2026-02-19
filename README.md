@@ -1,30 +1,30 @@
 # Runex
 
-Công cụ CLI để phát hiện và phân tích lỗi runtime theo thời gian thực.
+CLI tool to detect and analyze runtime errors in real-time.
 
-## Tính năng
+## Features
 
-- **Phát hiện lỗi thời gian thực**: Giám sát stdout/stderr khi streaming output của command
-- **Hỗ trợ đa ngôn ngữ**: Phát hiện lỗi từ Go, Python, Node.js, Java, Ruby và Rust
-- **Trích xuất Stack Trace**: Tự động trích xuất stack trace từ error output
-- **Phân tích AI**: Tùy chọn phân tích bằng AI để hiểu sâu hơn về lỗi
-- **Màu sắc cho Terminal**: Thông báo lỗi có màu sắc thân thiện với terminal
+- **Real-time Error Detection**: Monitors stdout/stderr while streaming command output
+- **Multi-language Support**: Detects errors from Go, Python, Node.js, Java, Ruby, and Rust
+- **Stack Trace Extraction**: Automatically extracts stack traces from error output
+- **AI-Powered Analysis**: Optional AI analysis for deeper error understanding
+- **Colored Output**: Terminal-friendly colored error messages
 
-## Giới thiệu
+## Introduction
 
-Runex là một công cụ dòng lệnh (CLI) giúp bạn giám sát và phát hiện lỗi runtime một cách tự động khi chạy các chương trình. Thay vì phải đọc toàn bộ output để tìm lỗi, Runex sẽ theo dõi stdout/stderr và ngay lập tức thông báo khi phát hiện lỗi cùng với stack trace đầy đủ.
+Runex is a command-line interface (CLI) tool that helps you monitor and detect runtime errors automatically when running programs. Instead of having to read through the entire output to find errors, Runex monitors stdout/stderr and immediately notifies you when errors are detected along with the full stack trace.
 
-## Cài đặt
+## Installation
 
-### Từ source (sử dụng Go)
+### From source (using Go)
 
 ```bash
 go install github.com/runex/runex@latest
 ```
 
-### Từ GitHub Releases
+### From GitHub Releases
 
-Khi có bản phát hành, bạn có thể tải binary phù hợp với hệ điều hành của mình:
+When releases are available, you can download the appropriate binary for your operating system:
 
 ```bash
 # macOS (Apple Silicon)
@@ -43,13 +43,13 @@ chmod +x runex
 sudo mv runex /usr/local/bin/
 
 # Windows
-# Tải file .exe từ trang Releases và thêm vào PATH
+# Download the .exe file from the Releases page and add to PATH
 ```
 
-## Bắt đầu nhanh
+## Quick Start
 
 ```bash
-# Chạy bất kỳ command nào với phát hiện lỗi
+# Run any command with error detection
 runex go run main.go
 
 runex python script.py
@@ -57,26 +57,26 @@ runex python script.py
 runex node app.js
 ```
 
-## Sử dụng chi tiết
+## Detailed Usage
 
-### Các cờ (flags)
+### Flags
 
-| Cờ | Mô tả | Ví dụ |
-|-----|-------|-------|
-| `-v` | Bật chế độ verbose, hiển thị thêm thông tin debug | `runex -v go run main.go` |
-| `--no-color` | Tắt màu sắc trong output | `runex --no-color python script.py` |
-| `--ai` | Bật phân tích AI để hiểu sâu hơn về lỗi | `runex --ai node app.js` |
-| `--language` | Chỉ định ngôn ngữ thủ công (go, python, node, java, ruby, rust) | `runex --language go run main.go` |
+| Flag | Description | Example |
+|------|-------------|---------|
+| `-v` | Enable verbose mode, shows additional debug info | `runex -v go run main.go` |
+| `--no-color` | Disable colored output | `runex --no-color python script.py` |
+| `--ai` | Enable AI-powered analysis for deeper error understanding | `runex --ai node app.js` |
+| `--language` | Manually specify language (go, python, node, java, ruby, rust) | `runex --language go run main.go` |
 
-### Ví dụ theo ngôn ngữ
+### Language Examples
 
 #### Go
 
 ```bash
-# Chạy file Go
+# Run Go file
 runex go run main.go
 
-# Chạy test
+# Run tests
 runex go test ./...
 
 # Build
@@ -86,73 +86,73 @@ runex go build -o myapp .
 #### Python
 
 ```bash
-# Chạy script Python
+# Run Python script
 runex python script.py
 
-# Chạy module
+# Run module
 runex python -m mymodule
 
-# Sử dụng pipenv
+# Using pipenv
 runex pipenv run python main.py
 ```
 
 #### Node.js
 
 ```bash
-# Chạy file JavaScript
+# Run JavaScript file
 runex node app.js
 
-# Chạy với npm
+# Run with npm
 runex npm start
 
-# Chạy với yarn
+# Run with yarn
 runex yarn start
 ```
 
 #### Java
 
 ```bash
-# Chạy file class
+# Run class file
 runex java Main
 
-# Chạy với Maven
+# Run with Maven
 runex mvn exec:java
 
-# Chạy với Gradle
+# Run with Gradle
 runex gradle run
 ```
 
 #### Ruby
 
 ```bash
-# Chạy file Ruby
+# Run Ruby file
 runex ruby script.rb
 
-# Chạy với Bundler
+# Run with Bundler
 runex bundle exec ruby script.rb
 
-# Chạy Rails
+# Run Rails
 runex rails server
 ```
 
 #### Rust
 
 ```bash
-# Chạy project Rust
+# Run Rust project
 runex cargo run
 
-# Chạy test
+# Run tests
 runex cargo test
 
 # Build
 runex cargo build
 ```
 
-## Cấu hình
+## Configuration
 
-### File cấu hình
+### Configuration File
 
-Tạo file `~/.runex/config.yaml` để lưu cấu hình mặc định:
+Create `~/.runex/config.yaml` to store default configuration:
 
 ```yaml
 verbose: false
@@ -161,34 +161,34 @@ ai: false
 language: ""
 ```
 
-### Biến môi trường
+### Environment Variables
 
-| Biến | Mô tả | Giá trị mặc định |
-|------|-------|------------------|
-| `RUNEX_VERBOSE` | Bật chế độ verbose | `false` |
-| `RUNEX_NO_COLOR` | Tắt màu sắc | `false` |
-| `RUNEX_AI` | Bật phân tích AI | `false` |
-| `RUNEX_LANGUAGE` | Ngôn ngữ mặc định | `""` |
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `RUNEX_VERBOSE` | Enable verbose mode | `false` |
+| `RUNEX_NO_COLOR` | Disable colors | `false` |
+| `RUNEX_AI` | Enable AI analysis | `false` |
+| `RUNEX_LANGUAGE` | Default language | `""` |
 
-### Ưu tiên cấu hình
+### Configuration Priority
 
-Thứ tự ưu tiên (từ cao đến thấp):
-1. Cờ dòng lệnh (command line flags)
-2. Biến môi trường (environment variables)
-3. File cấu hình (`~/.runex/config.yaml`)
+Priority order (highest to lowest):
+1. Command line flags
+2. Environment variables
+3. Configuration file (`~/.runex/config.yaml`)
 
-## Cách hoạt động
+## How It Works
 
-1. **Khởi động**: Runex nhận command từ người dùng và thực thi nó
-2. **Giám sát**: Đồng thời đọc stdout và stderr từ command đang chạy
-3. **Phát hiện**: Phân tích output để tìm các pattern lỗi đã biết của từng ngôn ngữ
-4. **Thông báo**: Khi phát hiện lỗi, hiển thị thông báo với stack trace
-5. **Kết thúc**: Command kết thúc, Runex trả về exit code tương ứng
+1. **Startup**: Runex receives the command from the user and executes it
+2. **Monitoring**: Simultaneously reads stdout and stderr from the running command
+3. **Detection**: Analyzes output to find known error patterns for each language
+4. **Notification**: When an error is detected, displays the notification with stack trace
+5. **Completion**: Command finishes, Runex returns the corresponding exit code
 
-### Ngôn ngữ được hỗ trợ
+### Supported Languages
 
-| Ngôn ngữ | Loại lỗi phát hiện |
-|----------|-------------------|
+| Language | Detected Error Types |
+|----------|---------------------|
 | Go       | panic, runtime error |
 | Python   | exceptions, errors |
 | Node.js  | Error, TypeError, ReferenceError, UnhandledPromiseRejection |
@@ -196,18 +196,18 @@ Thứ tự ưu tiên (từ cao đến thấp):
 | Ruby     | errors |
 | Rust     | panic, compile errors |
 
-## Ví dụ thực tế
+## Real-world Examples
 
-### Ví dụ 1: Debug ứng dụng Go
+### Example 1: Debug Go Application
 
 ```bash
-# Giả sử bạn có file main.go với lỗi
+# Assuming you have a main.go with an error
 runex -v go run main.go
 ```
 
 Output:
 ```
-[ERROR] Phát hiện lỗi Go
+[ERROR] Go error detected
 panic: index out of range [1] with length 0
 
 goroutine 1 [running]:
@@ -215,31 +215,31 @@ main.main()
     /path/to/main.go:10 +0x...
 ```
 
-### Ví dụ 2: Debug script Python
+### Example 2: Debug Python Script
 
 ```bash
-# Chạy script Python với verbose
+# Run Python script with verbose
 runex -v python myscript.py
 ```
 
-### Ví dụ 3: Debug Node.js với AI
+### Example 3: Debug Node.js with AI
 
 ```bash
-# Phân tích lỗi Node.js bằng AI
+# Analyze Node.js errors using AI
 runex --ai node app.js
 ```
 
-### Ví dụ 4: Tắt màu cho CI/CD
+### Example 4: Disable Colors for CI/CD
 
 ```bash
-# Chạy trong CI environment
+# Run in CI environment
 runex --no-color go test ./...
 ```
 
-### Ví dụ 5: Chỉ định ngôn ngữ thủ công
+### Example 5: Force Language Detection
 
 ```bash
-# Force detection cho Go
+# Force detection for Go
 runex --language go run main.go
 ```
 
