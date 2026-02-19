@@ -1,0 +1,56 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+
+      - name: Run tests
+        run: go test ./...
+
+      - name: Build
+        env:
+          CGO_ENABLED: 0
+        run: |
+          go build -ldflags="-s -w" -o runex ./cmd/runex
+
+      - name: Create ZIP archives
+        run: |
+          zip runex-darwin-amd64.zip runex
+          zip runex-darwin-arm64.zip runex
+          zip runex-linux-amd64.zip runex
+          zip runex-linux-arm64.zip runex
+          zip runex-windows-amd64.zip runex.exe
+
+      - name: Create checksums
+        run: |
+          sha256sum runex-darwin-amd64.zip runex-darwin-arm64.zip runex-linux-amd64.zip runex-linux-arm64.zip runex-windows-amd64.zip > checksums.txt
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            runex-darwin-amd64.zip
+            runex-darwin-arm64.zip
+            runex-linux-amd64.zip
+            runex-linux-arm64.zip
+            runex-windows-amd64.zip
+            checksums.txt
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
