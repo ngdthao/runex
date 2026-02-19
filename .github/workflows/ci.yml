@@ -62,6 +62,7 @@ jobs:
           GOOS: ${{ matrix.goos }}
           GOARCH: ${{ matrix.goarch }}
         run: |
+          go mod tidy
           go mod download
           EXT=""
           if [ "$GOOS" = "windows" ]; then
